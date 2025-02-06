@@ -3,7 +3,7 @@ public class Player{
     private int score;
     private String name;
 
-    //Default Contstructor
+    //Default Constructor
     public Player(){
         name = "Simon";
         score = 10;
@@ -16,9 +16,9 @@ public class Player{
     }
 
     //Copy Constructor
-    public Player(Player copy){
-        this.name = copy.name;
-        this.score = copy.score;
+    public Player(Player other){
+        this.name = other.name;
+        this.score = other.score;
     }
 
     public int getScore() {
@@ -40,8 +40,9 @@ public class Player{
     }
 
     /**
-     *create the overrride method
+     *create the override method
      * BUT, is not working to do it properly
      */
+
 
 }
