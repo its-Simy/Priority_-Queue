@@ -7,19 +7,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        PQList pq = new PQList();
+
         try {
             FileReader fileReader = new FileReader("info.txt");
             Scanner infile = new Scanner(fileReader);
-            String line;
+            int counter = 0;
+            String name;
+            int score;
+
 
             while(infile.hasNextLine()) {
-                line = infile.nextLine();
-                System.out.println(line);
+                name = infile.nextLine();
+                counter++;
+                if(counter % 2 != 0){
+                    score = Integer.parseInt(infile.nextLine());
+                    counter++;
+                    Player p = new Player(name, score);
+                    pq.add(p);
+                }
             }
+            infile.close();
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        System.out.println(pq.getSize() + "\n");
 
+        Player highest = pq.getHighestScorePlayer();
+
+        System.out.println("The player with the highest score is " + highest.getName() + "\n"
+                + "With the score of " + highest.getScore() + "\n");
+
+        System.out.println(pq.getSize());
     }
 }

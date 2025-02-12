@@ -3,7 +3,7 @@ public interface PriorityQueue {
 
     void add(Player a);
 
-    Player getHighestScorePlayer();
+    public Player getHighestScorePlayer();
 
     void clear();
 
