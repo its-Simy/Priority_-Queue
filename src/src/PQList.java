@@ -15,23 +15,30 @@ public class PQList implements PriorityQueue {
         head = null;
         temp = null;
         tail = null;
+        counter = 0;
     }
 
     /**
      *Copy constructor
      */
     public PQList(PQList copy) {
-        if(copy.head == null) {
-            this.head = null;
-            this.temp = null;
-            this.tail = null;
+        this.head = null;
+        this.tail = null;
+        this.counter = 0;
+        //if its empty it will just return nothing
+        if (copy.head == null) {
+            return;
         }
-        else{
-            Node temp = copy.head;
-            while(temp.next != null) {
-                this.add(temp.getPlayer().createClone());
-            }
+        //sets to the beginning of the linked list
+        Node tracker = copy.head;
+        while (tracker.next != null) {
+
+            Player copyied_player = tracker.player.createClone();
+
+            this.add(copyied_player);
+            tracker = tracker.next;
         }
+
     }
 
     /**
@@ -141,7 +148,6 @@ public class PQList implements PriorityQueue {
     public boolean isEmpty() {
         return (head == null && tail == null);
     }
-
 
 
 }
