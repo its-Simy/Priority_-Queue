@@ -3,6 +3,9 @@ import com.sun.jdi.ObjectReference;
 import java.util.Objects;
 
 public class Player{
+    /**
+     *All the data members needed
+     */
 
     private int score;
     private String name;

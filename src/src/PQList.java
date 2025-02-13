@@ -23,9 +23,10 @@ public class PQList implements PriorityQueue {
      */
     public PQList(PQList copy) {
         this.head = null;
+        this.temp = null;
         this.tail = null;
         this.counter = 0;
-        //if its empty it will just return nothing
+        //if queue is empty it will return nothing
         if (copy.head == null) {
             return;
         }
@@ -38,7 +39,14 @@ public class PQList implements PriorityQueue {
             this.add(copyied_player);
             tracker = tracker.next;
         }
+        this.temp = this.head;
+    }
 
+    /**
+     * Creates a clone of current instance using the copy constructor
+     */
+    public PQList createClone(){
+        return new PQList(this);
     }
 
     /**
@@ -71,7 +79,6 @@ public class PQList implements PriorityQueue {
             return null;
         }
         //next it begins to iterate through the linked list to find the highest score
-        else{
             Player highest = head.getPlayer();
             temp = head.next;
             while(temp != null) {
@@ -87,21 +94,30 @@ public class PQList implements PriorityQueue {
             //if the first person in the list has the highest score, it sets the head to the next node
             if(deep_copy.equals(head.getPlayer())) {
                 head = head.next;
+                if(head == null)
+                    tail = null;
             }
 
+
             //if the last person in the list has the highest score it will iterate through the list again and keep track of the node before it in order to set it as the new tail
-            if(deep_copy.equals(tail.getPlayer())) {
-                Node previous = null;
-                temp = head;
-
-                while(temp.next != null) {
-                    previous = temp;
-                    temp = temp.next;
+            else if(deep_copy.equals(tail.getPlayer())) {
+                if(head == tail){
+                    head = null;
+                    tail = null;
                 }
+                else {
+                    Node previous = null;
+                    temp = head;
 
-                if(previous != null) {
-                    previous.next = null;
-                    tail = previous;
+                    while (temp.next != null) {
+                        previous = temp;
+                        temp = temp.next;
+                    }
+
+                    if (previous != null) {
+                        previous.next = null;
+                        tail = previous;
+                    }
                 }
             }
             //Will go to the highest node in the linked list, then will keep track as the previous. It will then move the pointer to the node after the highest
@@ -120,7 +136,7 @@ public class PQList implements PriorityQueue {
 
             counter--;
             return highest;
-        }
+
     }
 
     /**
@@ -148,6 +164,9 @@ public class PQList implements PriorityQueue {
     public boolean isEmpty() {
         return (head == null && tail == null);
     }
+
+
+
 
 
 }
